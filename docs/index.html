@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clinical Models — Healthcare AI Research Platform</title>
+<style>
+:root{--navy:#1B3A6B;--teal:#0D7377;--green:#1D9E75;--purple:#534AB7;
+  --amber:#BA7517;--bg:#F8F9FB;--card:#FFF;--text:#1A1A2E;
+  --muted:#64748B;--border:#E2E8F0;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);}
+.warn{background:#FFF3CD;border-bottom:3px solid #F59E0B;padding:.75rem 2rem;font-size:.85rem;}
+.warn strong{color:#92400E;}
+header{background:var(--navy);color:white;padding:3rem 2rem;border-bottom:4px solid var(--teal);text-align:center;}
+header h1{font-size:2rem;font-weight:700;margin-bottom:.5rem;}
+header p{font-size:1rem;opacity:.8;max-width:600px;margin:0 auto;}
+.meta{display:flex;justify-content:center;gap:1.5rem;margin-top:1.5rem;flex-wrap:wrap;}
+.meta span{font-size:.8rem;opacity:.7;background:rgba(255,255,255,.1);
+  padding:.3rem 1rem;border-radius:999px;}
+main{max-width:1100px;margin:0 auto;padding:2.5rem 1.5rem;}
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:2.5rem;}
+.metric{background:var(--card);border:1px solid var(--border);border-radius:10px;
+  padding:1rem;text-align:center;border-top:3px solid var(--teal);}
+.metric .lbl{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.3rem;}
+.metric .val{font-size:1.6rem;font-weight:700;color:var(--navy);line-height:1;}
+.metric .sub{font-size:.7rem;color:var(--muted);margin-top:.2rem;}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:2.5rem;}
+@media(max-width:800px){.grid{grid-template-columns:1fr;}}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:1.5rem;border-top:4px solid var(--teal);display:flex;flex-direction:column;}
+.card.c2{border-top-color:var(--purple);}
+.card.c3{border-top-color:var(--amber);}
+.num{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--muted);margin-bottom:.4rem;}
+.title{font-size:1.05rem;font-weight:700;margin-bottom:.6rem;color:var(--navy);}
+.desc{font-size:.83rem;color:var(--muted);line-height:1.7;margin-bottom:1rem;flex:1;}
+.stats{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1rem;}
+.stat{background:var(--bg);border:1px solid var(--border);border-radius:6px;
+  padding:.3rem .6rem;font-size:.75rem;}
+.stat strong{color:var(--navy);}
+.badge{display:inline-block;padding:.2rem .6rem;border-radius:999px;
+  font-size:.7rem;font-weight:600;margin-bottom:.6rem;}
+.done{background:#D1FAE5;color:#065F46;}
+.wip{background:#FEF3C7;color:#92400E;}
+.links{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto;}
+.btn{padding:.35rem .9rem;border-radius:7px;font-size:.78rem;font-weight:600;
+  text-decoration:none;display:inline-block;}
+.b1{background:var(--navy);color:white;}
+.b2{background:var(--purple);color:white;}
+.b3{background:var(--amber);color:white;}
+.bs{background:var(--bg);border:1px solid var(--border);color:var(--text);}
+h2{font-size:.95rem;font-weight:700;color:var(--navy);text-transform:uppercase;
+  letter-spacing:.06em;margin-bottom:1rem;padding-bottom:.4rem;
+  border-bottom:2px solid var(--teal);}
+table{width:100%;border-collapse:collapse;font-size:.83rem;margin-bottom:1rem;}
+thead tr{background:var(--navy);color:white;}
+thead th{padding:.5rem .8rem;text-align:left;font-size:.75rem;font-weight:600;text-transform:uppercase;}
+tbody td{padding:.45rem .8rem;border-bottom:1px solid var(--border);}
+tbody tr:nth-child(even) td{background:var(--bg);}
+tbody tr.best td{background:#EEF9F4;font-weight:600;}
+footer{background:var(--navy);color:rgba(255,255,255,.6);text-align:center;
+  padding:1.5rem;font-size:.8rem;margin-top:3rem;}
+footer a{color:rgba(255,255,255,.8);}
+</style>
+</head>
+<body>
+<div class="warn">⚠️ <strong>RESEARCH ONLY — NOT FOR CLINICAL USE.</strong>
+Trained on de-identified MIMIC data under PhysioNet DUA. Not for patient care.</div>
+<header>
+  <h1>Clinical Models</h1>
+  <p>Healthcare AI research — MUMPS HIE infrastructure, liver transplant
+     candidate identification, and LLM benchmarks</p>
+  <div class="meta">
+    <span>Harkirat Dhillon MD · MS Health Informatics</span>
+    <span>Northwell Health · Ashburn VA</span>
+    <span>MIMIC-III + MIMIC-IV · YottaDB r2.06</span>
+  </div>
+</header>
+<main>
+<div class="metrics">
+  <div class="metric"><div class="lbl">Patients in ^PHD</div>
+    <div class="val">411K</div><div class="sub">MIMIC-III + IV</div></div>
+  <div class="metric"><div class="lbl">Clinical Records</div>
+    <div class="val">~200M</div><div class="sub">Labs meds dx</div></div>
+  <div class="metric"><div class="lbl">MUMPS Speedup</div>
+    <div class="val">3.4x</div><div class="sub">vs PostgreSQL</div></div>
+  <div class="metric"><div class="lbl">Training AUC</div>
+    <div class="val">0.853</div><div class="sub">MIMIC-III XGBoost</div></div>
+  <div class="metric"><div class="lbl">Temporal Validation</div>
+    <div class="val">0.712</div><div class="sub">MIMIC-IV 2008-2019</div></div>
+  <div class="metric"><div class="lbl">Risk Gradient</div>
+    <div class="val">4.1x</div><div class="sub">High vs Low</div></div>
+</div>
+<div class="grid">
+  <div class="card">
+    <div class="num">Project 01</div>
+    <div class="badge done">Complete</div>
+    <div class="title">HIE Platform</div>
+    <div class="desc">YottaDB MUMPS + PostgreSQL dual-architecture HIE.
+      MIMIC-III and MIMIC-IV loaded into ^PHD globals.
+      411,148 patients, ~200M records, 40 GB.</div>
+    <div class="stats">
+      <div class="stat"><strong>411K</strong> patients</div>
+      <div class="stat"><strong>~200M</strong> records</div>
+      <div class="stat"><strong>3.4x</strong> faster</div>
+    </div>
+    <div class="links">
+      <a href="../01_HIE_Platform/docs/index.html" class="btn b1">Dashboard</a>
+      <a href="../01_HIE_Platform/docs/paper.html" class="btn bs">Paper</a>
+      <a href="../01_HIE_Platform/docs/MUMPS_GLOBALS_DOCUMENTATION.md" class="btn bs">MUMPS Docs</a>
+    </div>
+  </div>
+  <div class="card c2">
+    <div class="num">Project 02</div>
+    <div class="badge done">Complete</div>
+    <div class="title">Liver Deterioration</div>
+    <div class="desc">XGBoost model predicting liver disease deterioration
+      at next admission. AUC 0.853 train, 0.712 temporal validation.
+      334 patients flagged, 69.5% verified true positives.</div>
+    <div class="stats">
+      <div class="stat"><strong>0.853</strong> AUC train</div>
+      <div class="stat"><strong>0.712</strong> temporal</div>
+      <div class="stat"><strong>4.1x</strong> risk gradient</div>
+    </div>
+    <div class="links">
+      <a href="../02_Liver_Deterioration/docs/index.html" class="btn b2">Dashboard</a>
+      <a href="../02_Liver_Deterioration/docs/paper.html" class="btn bs">Paper</a>
+      <a href="../02_Liver_Deterioration/docs/model_card.html" class="btn bs">Model Card</a>
+    </div>
+  </div>
+  <div class="card c3">
+    <div class="num">Project 03</div>
+    <div class="badge wip">In Progress</div>
+    <div class="title">LLM Benchmark</div>
+    <div class="desc">Benchmarks MUMPS ^PHD traversal vs PostgreSQL JOINs
+      for assembling patient narratives for LLM training.
+      Expected 15-20x speedup, higher GPU utilization.</div>
+    <div class="stats">
+      <div class="stat"><strong>411K</strong> patients ready</div>
+      <div class="stat"><strong>~18x</strong> expected</div>
+    </div>
+    <div class="links">
+      <a href="../03_LLM_Benchmark/README.md" class="btn b3">Details</a>
+    </div>
+  </div>
+</div>
+<section style="margin-bottom:2.5rem;">
+  <h2>Complete Results — Liver Deterioration</h2>
+  <table>
+    <thead><tr><th>Experiment</th><th>Pairs</th><th>Pos%</th><th>AUC</th><th>95% CI</th></tr></thead>
+    <tbody>
+      <tr class="best"><td>MIMIC-III XGBoost (training) ★</td><td>2,123</td><td>22.3%</td><td>0.853</td><td>[0.818,0.884]</td></tr>
+      <tr><td>MIMIC-III MUMPS path</td><td>1,265</td><td>36.3%</td><td>0.820</td><td>[0.774,0.860]</td></tr>
+      <tr><td>MIMIC-IV All 2008-2019</td><td>4,612</td><td>17.1%</td><td>0.712</td><td>[0.693,0.732]</td></tr>
+      <tr><td>MIMIC-IV Early 2008-2013</td><td>2,994</td><td>16.2%</td><td>0.707</td><td>[0.683,0.731]</td></tr>
+      <tr><td>MIMIC-IV Post 2014-2019</td><td>1,618</td><td>19.5%</td><td>0.735</td><td>[0.703,0.767]</td></tr>
+      <tr><td>MIMIC-IV ICU only</td><td>973</td><td>16.3%</td><td>0.755</td><td>[0.713,0.797]</td></tr>
+      <tr><td>MIMIC-IV Ward only</td><td>3,639</td><td>17.3%</td><td>0.701</td><td>[0.678,0.724]</td></tr>
+      <tr style="color:#888;font-style:italic;"><td>Ghandian et al. 2022 (reference)</td><td>—</td><td>—</td><td>0.871</td><td>[0.859,0.882]</td></tr>
+    </tbody>
+  </table>
+</section>
+</main>
+<footer>
+  Clinical Models — Healthcare AI Research Platform |
+  Harkirat Dhillon · Northwell Health · 2026 |
+  <a href="https://github.com/harkiratdhillon42482/Clinical-Models">GitHub</a>
+</footer>
+</body></html>
